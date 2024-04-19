@@ -21,6 +21,6 @@ from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('weatherUpdate.urls')),
     path('weatherUpdate/', include('weatherUpdate.urls')),
-    path('', RedirectView.as_view(url='weatherUpdate/')),
 ]

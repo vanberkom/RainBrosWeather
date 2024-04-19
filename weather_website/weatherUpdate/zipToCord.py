@@ -6,6 +6,10 @@ def ZipToCity(zip_code):
     search = SearchEngine()
     zipcode = search.by_zipcode(zip_code)
     
+    latitude = None
+    longitude = None
+    city = ''
+
     if zipcode:
         city = zipcode.major_city
         latitude = zipcode.lat
@@ -16,7 +20,7 @@ def ZipToCity(zip_code):
 
 
 # Testing with Fargo
-zip = '58401'
+zip = '58103'
 city, lat, long  = ZipToCity(zip)
 
 if lat and long:

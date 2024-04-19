@@ -12,7 +12,7 @@ def ZipToCity(zip_code):
         longitude = zipcode.lng
         return city, latitude, longitude
     else:
-        return "City not found", None, None
+        return "No city is found.", latitude, longitude
 
 
 # Testing with Fargo

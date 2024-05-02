@@ -59,3 +59,17 @@ def daily(request):
 
 def weekly(request):
     return render(request, 'weekly.html', context={})
+
+def affirmation(request):
+    try:
+        response = requests.get('https://zenquotes.io/api/random')
+        data = response.json()
+        quote = data[0]['q']  # Quote text
+        author = data[0]['a']  # Author of the quote
+    except Exception as e:
+        quote = "No affirmation available at the moment."
+        author = ""
+        print(f"API request failed: {e}")
+    return render(request, 'affirmation.html', {'quote': quote})
+
+

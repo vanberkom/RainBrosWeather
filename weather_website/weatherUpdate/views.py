@@ -121,7 +121,33 @@ def daily(request):
 
 
 def weekly(request):
-    return render(request, 'weekly.html', context={})
+    zip_code = request.GET.get('zipcode', None)
+    context = {}
+    if zip_code:
+        city, lat, lon = ZipToCity(zip_code)
+        if lat and lon:
+            input_url = f'https://api.weather.gov/points/{lat},{lon}'
+            response = requests.get(input_url)
+            if response.status_code == 200:
+                data = response.json()
+                forecast_url = data['properties']['forecast']
+                response = requests.get(forecast_url)
+                if response.status_code == 200:
+                    forecast_data = response.json()['properties']['periods']
+                    context = {
+                        'city': city,
+                        'forecast_days': forecast_data  # Ensure this data structure matches what the API returns
+                    }
+                    return render(request, 'weekly.html', context)
+                else:
+                    return render(request, 'error.html', {'message': 'Failed to fetch weekly forecast.'})
+            else:
+                return render(request, 'error.html', {'message': 'Failed to fetch location data.'})
+        else:
+            return render(request, 'error.html', {'message': 'Invalid latitude or longitude.'})
+    else:
+        return render(request, 'error.html', {'message': 'Zip code is required.'})
+    
 
 def affirmation(request):
     try:
@@ -149,34 +175,3 @@ def affirmation(request):
         print(f"API request failed: {e}")
     return render(request, 'affirmation.html', {'quote': quote})
     
-def weekly_weather(request):
-    zip_code = request.GET.get('zipcode', '58078')  # Default zip code if none provided
-    context = {}
-
-    # Assume you have a function that converts zip code to gridpoint; modify as needed
-    city, lat, lon = zipToCord.ZipToCity(zip_code)  
-    grid_x, grid_y = zipToCord.ZipToGrid(lat, lon)  # You will need to implement ZipToGrid
-
-    url = f"https://api.weather.gov/gridpoints/FGF/{grid_x},{grid_y}/forecast"  # Example gridpoint
-
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        weather_data = response.json()
-
-        days = weather_data['properties']['periods']
-        forecast_days = days[:14:2]  # Pick day forecasts out of day and night
-
-        context = {
-            'zipcode': zip_code,
-            'forecast_days': forecast_days,
-        }
-        return render(request, 'weekly.html', context)
-
-    except requests.RequestException as e:
-        context['message'] = str(e)
-        return render(request, 'error.html', context)
-
-    except Exception as e:
-        context['message'] = 'Failed to process the weather data.'
-        return render(request, 'error.html', context)

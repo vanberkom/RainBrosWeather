@@ -4,6 +4,42 @@
       <h2>Today's Weather - {{ date }}</h2>
       <h5><strong>City:</strong> {{ city }}</h5>
       <h5><strong>Current Temperature:</strong> {{ temperature }}&deg;F</h5>
-      
+      <h3><strong>Hourly Temperature:</strong></h3>
+    </div>
+
+    <div>
+      <img src="{{ hourly_pic1 }}" alt="hourly pic" />
+      <br>
+      <h5>Time: {{ hourly_time1 }}</h5>
+      <h5>Temperature: {{ hourly_temp1 }}&deg;F</h5>
+      <h5>Wind: {{ hourly_wind1 }} {{ hourly_winddir1 }}</h5>
+    </div>
+    <div>
+      <img src="{{ hourly_pic2 }}" alt="hourly pic" />
+      <br>
+      <h5>Time: {{ hourly_time2 }}</h5>
+      <h5>Temperature: {{ hourly_temp2 }}&deg;F</h5>
+      <h5>Wind: {{ hourly_wind2 }} {{ hourly_winddir2 }}</h5>
+    </div>
+    <div>
+      <img src="{{ hourly_pic3 }}" alt="hourly pic" />
+      <br>
+      <h5>Time: {{ hourly_time3 }}</h5>
+      <h5>Temperature: {{ hourly_temp3 }}&deg;F</h5>
+      <h5>Wind: {{ hourly_wind3 }} {{ hourly_winddir3 }}</h5>
+    </div>
+    <div>
+      <img src="{{ hourly_pic4 }}" alt="hourly pic" />
+      <br>
+      <h5>Time: {{ hourly_time4 }}</h5>
+      <h5>Temperature: {{ hourly_temp4 }}&deg;F</h5>
+      <h5>Wind: {{ hourly_wind4 }} {{ hourly_winddir4 }}</h5>
+    </div>
+    <div>
+      <img src="{{ hourly_pic5 }}" alt="hourly pic" />
+      <br>
+      <h5>Time: {{ hourly_time5 }}</h5>
+      <h5>Temperature: {{ hourly_temp5 }}&deg;F</h5>
+      <h5>Wind: {{ hourly_wind5 }} {{ hourly_winddir5 }}</h5>
     </div>
 {% endblock %}

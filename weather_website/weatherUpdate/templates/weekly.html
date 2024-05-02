@@ -1,2 +1,22 @@
 {% extends 'base.html' %}
-<p>Weekly</p>
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Weather Forecast for Zip Code: {{ zipcode }}</h2>
+    <h3>7 Day Forecast</h3>
+    <div class="row">
+        {% for day in forecast_days %}
+        <div class="col-md-1">
+            <div class="card text-center">
+                <div class="card-header">{{ day.name }}</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ day.temperature }}°F</h5>
+                    <img src="{{ day.icon }}" alt="weather icon" style="width: 50px; height: auto;">
+                    <p class="card-text">{{ day.shortForecast }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

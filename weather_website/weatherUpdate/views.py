@@ -148,3 +148,35 @@ def affirmation(request):
         author = ""
         print(f"API request failed: {e}")
     return render(request, 'affirmation.html', {'quote': quote})
+    
+def weekly_weather(request):
+    zip_code = request.GET.get('zipcode', '58078')  # Default zip code if none provided
+    context = {}
+
+    # Assume you have a function that converts zip code to gridpoint; modify as needed
+    city, lat, lon = zipToCord.ZipToCity(zip_code)  
+    grid_x, grid_y = zipToCord.ZipToGrid(lat, lon)  # You will need to implement ZipToGrid
+
+    url = f"https://api.weather.gov/gridpoints/FGF/{grid_x},{grid_y}/forecast"  # Example gridpoint
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        weather_data = response.json()
+
+        days = weather_data['properties']['periods']
+        forecast_days = days[:14:2]  # Pick day forecasts out of day and night
+
+        context = {
+            'zipcode': zip_code,
+            'forecast_days': forecast_days,
+        }
+        return render(request, 'weekly.html', context)
+
+    except requests.RequestException as e:
+        context['message'] = str(e)
+        return render(request, 'error.html', context)
+
+    except Exception as e:
+        context['message'] = 'Failed to process the weather data.'
+        return render(request, 'error.html', context)

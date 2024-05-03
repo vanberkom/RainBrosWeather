@@ -25,4 +25,3 @@ def timeFormatter(time):
         time4 = 0
     return str(time), str(time1), str(time2), str(time3), str(time4)
 
-print(timeFormatter(22))

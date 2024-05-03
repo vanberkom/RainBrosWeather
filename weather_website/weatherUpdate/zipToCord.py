@@ -22,8 +22,3 @@ def ZipToCity(zip_code):
 # Testing with Fargo
 zip = '58103'
 city, lat, long  = ZipToCity(zip)
-
-if lat and long:
-    print(str(lat))
-    print(str(long))
-    print(str(city))

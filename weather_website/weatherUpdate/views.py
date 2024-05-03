@@ -16,6 +16,16 @@ def errorpage(request):
 def daily(request):
     zip_code = request.GET.get('zipcode', None)
     context={}
+    quote = ""
+    try:
+        response = requests.get('https://zenquotes.io/api/random')
+        data = response.json()
+        quote = data[0]['q']  # Quote text
+        author = data[0]['a']  # Author of the quote
+    except Exception as e:
+        quote = "No affirmation available at the moment."
+        author = ""
+        print(f"API request failed: {e}")
     if zip_code:
         city, lat, lon = zipToCord.ZipToCity(zip_code)
         
@@ -112,6 +122,7 @@ def daily(request):
                         'shortForecast': shortForecast,
                         'high': high,
                         'low': low,
+                        'quote': quote,
                     }
                     # Combining the contexts
                     context = context | c2
@@ -144,8 +155,36 @@ def weekly(request):
                 forecast_url = data['properties']['forecast']
                 response = requests.get(forecast_url)
                 if response.status_code == 200:
+                    results = response.json()
+                    day1_temp1 = results['properties']['periods'][0]['temperature']
+                    day1_temp2 = results['properties']['periods'][1]['temperature']
+                    day1_fore = results['properties']['periods'][0]['shortForecast']
+                    day1_high, day1_low = weatherCalc.high_low(day1_temp1,day1_temp2)
+                    day2_temp1 = results['properties']['periods'][2]['temperature']
+                    day2_temp2 = results['properties']['periods'][3]['temperature']
+                    day2_fore = results['properties']['periods'][2]['shortForecast']
+                    day2_high, day2_low = weatherCalc.high_low(day2_temp1,day2_temp2)
+                    day3_temp1 = results['properties']['periods'][4]['temperature']
+                    day3_temp2 = results['properties']['periods'][5]['temperature']
+                    day3_fore = results['properties']['periods'][4]['shortForecast']
+                    day3_high, day3_low = weatherCalc.high_low(day3_temp1,day3_temp2)
+                    day4_temp1 = results['properties']['periods'][6]['temperature']
+                    day4_temp2 = results['properties']['periods'][7]['temperature']
+                    day4_fore = results['properties']['periods'][6]['shortForecast']
+                    day4_high, day4_low = weatherCalc.high_low(day4_temp1,day4_temp2)
+                    day5_temp1 = results['properties']['periods'][8]['temperature']
+                    day5_temp2 = results['properties']['periods'][9]['temperature']
+                    day5_fore = results['properties']['periods'][8]['shortForecast']
+                    day5_high, day5_low = weatherCalc.high_low(day5_temp1,day5_temp2)
+                    day6_temp1 = results['properties']['periods'][10]['temperature']
+                    day6_temp2 = results['properties']['periods'][11]['temperature']
+                    day6_fore = results['properties']['periods'][10]['shortForecast']
+                    day6_high, day6_low = weatherCalc.high_low(day6_temp1,day6_temp2)
+                    day7_temp1 = results['properties']['periods'][12]['temperature']
+                    day7_temp2 = results['properties']['periods'][13]['temperature']
+                    day7_fore = results['properties']['periods'][12]['shortForecast']
+                    day7_high, day7_low = weatherCalc.high_low(day7_temp1,day7_temp2)
                     days = weatherCalc.getDays()
-                    
                     context = {
                         'day1': days[0],
                         'day2': days[1],
@@ -155,6 +194,27 @@ def weekly(request):
                         'day6': days[5],
                         'day7': days[6],
                         'city': city,
+                        'day1_high' : day1_high,
+                        'day1_low': day1_low,
+                        'day2_high': day2_high,
+                        'day2_low': day2_low,
+                        'day3_high' : day3_high,
+                        'day3_low': day3_low,
+                        'day4_high': day4_high,
+                        'day4_low': day4_low,
+                        'day5_high' : day5_high,
+                        'day5_low': day5_low,
+                        'day6_high': day6_high,
+                        'day6_low': day6_low,
+                        'day7_high' : day7_high,
+                        'day7_low': day7_low,
+                        'day1_fore': day1_fore,
+                        'day2_fore': day2_fore,
+                        'day3_fore': day3_fore,
+                        'day4_fore': day4_fore,
+                        'day5_fore': day5_fore,
+                        'day6_fore': day6_fore,
+                        'day7_fore': day7_fore,
                     }
                     return render(request, 'weekly.html', context)
                 else:
@@ -168,13 +228,5 @@ def weekly(request):
     
 
 def affirmation(request):
-    try:
-        response = requests.get('https://zenquotes.io/api/random')
-        data = response.json()
-        quote = data[0]['q']  # Quote text
-        author = data[0]['a']  # Author of the quote
-    except Exception as e:
-        quote = "No affirmation available at the moment."
-        author = ""
-        print(f"API request failed: {e}")
+    
     return render(request, 'affirmation.html', {'quote': quote})

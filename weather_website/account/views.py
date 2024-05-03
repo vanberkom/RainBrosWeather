@@ -66,7 +66,8 @@ def register(request):
     # If not POST, render the registration form
     return render(request, 'register.html')
 
-def login():
-    pass
+def login(request):
+    return render(request, 'login.html')
+
 def logout():
     pass

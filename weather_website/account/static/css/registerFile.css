@@ -1,86 +1,112 @@
-/* Base styles */
+/* Body styling */
+body, span, a, label {
+    color: white; /* Make sure all text is white */
+    font-family: 'Roboto', sans-serif;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5; /* Light background color */
-    color: white; /* White text throughout the page */
+    background: #222D32;
 }
 
-/* Center the form container */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Makes the container take up the full height of the viewport */
+/* Login box styling */
+.login-box {
+    margin-top: 75px;
+    height: auto;
+    background: #1A2226;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-/* Form styles */
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Increased gap between fields */
-    padding: 30px; /* Increased padding */
-    background-color: #333; /* Dark background color for the form */
-    border-radius: 10px;
-    width: 100%;
-    max-width: 450px; /* Increased max width for more space */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Login key styling */
+.login-key {
+    height: 100px;
+    font-size: 80px;
+    line-height: 100px;
+    background: -webkit-linear-gradient(#27EF9F, #0DB8DE);
+    -webkit-text-fill-color: transparent;
 }
 
-.form:hover {
-    transform: scale(1.02);
-    border: 1px solid #555; /* Lighter border color on hover */
+/* Login title styling */
+.login-title {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #ECF0F5; /* This should also be white if you want all text white */
 }
 
-/* Form fields styles */
-.field {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px; /* Additional margin between fields */
+/* Login form styling */
+.login-form {
+    margin-top: 25px;
+    text-align: left;
 }
 
-.input-field {
-    padding: 12px; /* Increased padding for input fields */
-    margin-top: 5px;
-    border-radius: 5px;
+/* Input fields styling */
+input[type=text],
+input[type=password] {
+    background-color: #1A2226;
     border: none;
-    background-color: #555; /* Lighter background color for input fields */
-    color: white; /* White text in input fields */
+    border-bottom: 2px solid #0DB8DE;
+    border-radius: 0;
+    font-weight: bold;
     outline: none;
+    margin-bottom: 20px;
+    padding-left: 0;
+    color: black;
+    font-size: 16px; /* Increased font size */
 }
 
-/* Form labels styles */
-.form-label {
-    color: white;
+/* Focus styling */
+.form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-bottom: 2px solid #0DB8DE;
+    outline: 0;
+    background-color: #f2f7fa;
+    color: black;
 }
 
-/* Form buttons styles */
-.form .btn {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+/* Button styling */
+.btn-outline-primary,
+.btn-outline-secondary {
+    background-color: white; /* White background */
+    color: black; /* Black text */
+    border: 2px solid black; /* Optional: Black border */
+    border-radius: 4px; /* Optional: rounded corners */
+    font-weight: bold;
+    padding: 10px 15px; /* Consistent padding */
+    margin: 5px; /* Optional: consistent margin between buttons */
+    text-align: left; /* Center the text */
 }
 
-.button1,
-.button3 {
-    padding: 10px 20px; /* Increased padding for buttons */
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    transition: 0.3s ease-in-out;
-    background-color: #555; /* Lighter button background color */
-    color: white;
+/* Button hover effect */
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover {
+    background-color: #f2f2f2; /* Slightly darker white on hover */
+    color: black; /* Keep black text on hover */
 }
 
-.button1:hover,
-.button3:hover {
-    background-color: #777; /* Slightly lighter background color on hover */
+/* Container for buttons */
+.register-button {
+    text-align: left; /* Center the buttons */
+    margin-top: 20px; /* Add some space above the buttons */
 }
 
-/* Styling the cancel button */
-.button3 {
-    margin-left: 5px;
+/* Adjust text color */
+.register-text {
+    color: black;
 }
 
-/* Heading styles *
+
+
+/* Notification checkbox styling */
+.form-check-label {
+    color: white; /* White text */
+}
+
+.form-check-input {
+    border-radius: 4px;
+    border: 2px solid #0DB8DE;
+}

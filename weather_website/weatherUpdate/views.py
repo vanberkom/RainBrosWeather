@@ -2,7 +2,7 @@ from django.shortcuts import render
 import requests
 from datetime import datetime
 from datetime import date
-from . import zipToCord
+from . import zipToCord,timeFormat
 
 # Create your views here.
 def index(request):
@@ -27,6 +27,7 @@ def daily(request):
             if response.status_code == 200:
                 data = response.json()
                 forecast_url = data['properties']['forecast']
+                print(forecast_url)
                 hourly_url = data['properties']['forecastHourly']
                 response = requests.get(forecast_url)
                 
@@ -34,13 +35,17 @@ def daily(request):
                     
                     results = response.json()
                     temperature = results['properties']['periods'][0]['temperature']
+                    shortForecast = results['properties']['periods'][0]['shortForecast']
                     
+
                     today = date.today()
                     todays_date = today.strftime('%A, %B %d')
+                    
                     response = requests.get(hourly_url)
                     if response.status_code == 200:
                         results = response.json()
 
+                        # Getting api hourly data
                         hourly_temp1 = results['properties']['periods'][0]['temperature']
                         hourly_pic1 = results['properties']['periods'][0]['icon']
                         hourly_wind1 = results['properties']['periods'][0]['windSpeed']
@@ -63,14 +68,14 @@ def daily(request):
                         hourly_winddir5 = results['properties']['periods'][4]['windDirection']
                         
                         # Finding time
-                        current_time = datetime.now()
-                        current_hour = current_time.hour
-                        current_hour = current_hour - 17
-                        hourly_time1 = str(current_hour) + ":00"
-                        hourly_time2 = str(current_hour + 1) + ":00"
-                        hourly_time3 = str(current_hour + 2) + ":00"
-                        hourly_time4 = str(current_hour + 3) + ":00"
-                        hourly_time5 = str(current_hour + 4) + ":00"
+                        current_time = datetime.now().hour
+                        hourly_time1, hourly_time2, hourly_time3, hourly_time4, hourly_time5 = timeFormat.timeFormatter(current_time)
+                        hourly_time1 = hourly_time1 + ":00"
+                        hourly_time2 = hourly_time2 + ":00"
+                        hourly_time3 = hourly_time3 + ":00"
+                        hourly_time4 = hourly_time4 + ":00"
+                        hourly_time5 = hourly_time5 + ":00"
+                        # Filling Django Variables
                         context = {
                             'hourly_time1': hourly_time1,
                             'hourly_temp1': hourly_temp1,
@@ -98,13 +103,16 @@ def daily(request):
                             'hourly_wind5': hourly_wind5,
                             'hourly_winddir5': hourly_winddir5,
                         }
+                    # Adding city variables to django context
                     c2 = {
                         'city': city,
                         'temperature': temperature,
                         'date': todays_date,
+                        'shortForecast': shortForecast,
                     }
+                    # Combining the contexts
                     context = context | c2
-                    
+                    # Rendering the daily html with the information
                     return render(request, 'daily.html', context=context)
                 
                 else:
@@ -121,7 +129,33 @@ def daily(request):
 
 
 def weekly(request):
-    return render(request, 'weekly.html', context={})
+    zip_code = request.GET.get('zipcode', None)
+    context = {}
+    if zip_code:
+        city, lat, lon = zipToCord.ZipToCity(zip_code)
+        if lat and lon:
+            input_url = f'https://api.weather.gov/points/{lat},{lon}'
+            response = requests.get(input_url)
+            if response.status_code == 200:
+                data = response.json()
+                forecast_url = data['properties']['forecast']
+                response = requests.get(forecast_url)
+                if response.status_code == 200:
+                    forecast_data = response.json()['properties']['periods']
+                    context = {
+                        'city': city,
+                        'forecast_days': forecast_data  # Ensure this data structure matches what the API returns
+                    }
+                    return render(request, 'weekly.html', context)
+                else:
+                    return render(request, 'error.html', {'message': 'Failed to fetch weekly forecast.'})
+            else:
+                return render(request, 'error.html', {'message': 'Failed to fetch location data.'})
+        else:
+            return render(request, 'error.html', {'message': 'Invalid latitude or longitude.'})
+    else:
+        return render(request, 'error.html', {'message': 'Zip code is required.'})
+    
 
 def affirmation(request):
     try:

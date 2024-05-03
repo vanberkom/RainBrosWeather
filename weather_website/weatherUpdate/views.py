@@ -2,7 +2,8 @@ from django.shortcuts import render
 import requests
 from datetime import datetime
 from datetime import date
-from . import zipToCord,timeFormat
+from . import zipToCord,timeFormat, weatherCalc
+
 
 # Create your views here.
 def index(request):
@@ -36,8 +37,8 @@ def daily(request):
                     results = response.json()
                     temperature = results['properties']['periods'][0]['temperature']
                     shortForecast = results['properties']['periods'][0]['shortForecast']
-                    
-
+                    temperature1 = results['properties']['periods'][1]['temperature']
+                    high,low = weatherCalc.high_low(temperature,temperature1)
                     today = date.today()
                     todays_date = today.strftime('%A, %B %d')
                     
@@ -109,6 +110,8 @@ def daily(request):
                         'temperature': temperature,
                         'date': todays_date,
                         'shortForecast': shortForecast,
+                        'high': high,
+                        'low': low,
                     }
                     # Combining the contexts
                     context = context | c2
@@ -141,10 +144,17 @@ def weekly(request):
                 forecast_url = data['properties']['forecast']
                 response = requests.get(forecast_url)
                 if response.status_code == 200:
-                    forecast_data = response.json()['properties']['periods']
+                    days = weatherCalc.getDays()
+                    
                     context = {
+                        'day1': days[0],
+                        'day2': days[1],
+                        'day3': days[2],
+                        'day4': days[3],
+                        'day5': days[4],
+                        'day6': days[5],
+                        'day7': days[6],
                         'city': city,
-                        'forecast_days': forecast_data  # Ensure this data structure matches what the API returns
                     }
                     return render(request, 'weekly.html', context)
                 else:

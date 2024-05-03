@@ -125,7 +125,33 @@ def daily(request):
 
 
 def weekly(request):
-    return render(request, 'weekly.html', context={})
+    zip_code = request.GET.get('zipcode', None)
+    context = {}
+    if zip_code:
+        city, lat, lon = zipToCord.ZipToCity(zip_code)
+        if lat and lon:
+            input_url = f'https://api.weather.gov/points/{lat},{lon}'
+            response = requests.get(input_url)
+            if response.status_code == 200:
+                data = response.json()
+                forecast_url = data['properties']['forecast']
+                response = requests.get(forecast_url)
+                if response.status_code == 200:
+                    forecast_data = response.json()['properties']['periods']
+                    context = {
+                        'city': city,
+                        'forecast_days': forecast_data  # Ensure this data structure matches what the API returns
+                    }
+                    return render(request, 'weekly.html', context)
+                else:
+                    return render(request, 'error.html', {'message': 'Failed to fetch weekly forecast.'})
+            else:
+                return render(request, 'error.html', {'message': 'Failed to fetch location data.'})
+        else:
+            return render(request, 'error.html', {'message': 'Invalid latitude or longitude.'})
+    else:
+        return render(request, 'error.html', {'message': 'Zip code is required.'})
+    
 
 def affirmation(request):
     try:

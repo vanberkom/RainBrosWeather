@@ -27,6 +27,7 @@ def daily(request):
             if response.status_code == 200:
                 data = response.json()
                 forecast_url = data['properties']['forecast']
+                print(forecast_url)
                 hourly_url = data['properties']['forecastHourly']
                 response = requests.get(forecast_url)
                 
@@ -34,7 +35,9 @@ def daily(request):
                     
                     results = response.json()
                     temperature = results['properties']['periods'][0]['temperature']
+                    shortForecast = results['properties']['periods'][0]['shortForecast']
                     
+
                     today = date.today()
                     todays_date = today.strftime('%A, %B %d')
                     
@@ -105,6 +108,7 @@ def daily(request):
                         'city': city,
                         'temperature': temperature,
                         'date': todays_date,
+                        'shortForecast': shortForecast,
                     }
                     # Combining the contexts
                     context = context | c2

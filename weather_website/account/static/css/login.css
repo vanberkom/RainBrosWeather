@@ -1,112 +1,139 @@
-/* Body styling */
-body, span, a, label {
-    color: white; /* Make sure all text is white */
-    font-family: 'Roboto', sans-serif;
+/* Scope the rules to the login-container class */
+.login-container .login-box {
+  margin-top: 75px;
+  height: auto;
+  background: #1a2226;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-body {
-    background: #222D32;
-}
-
-/* Login box styling */
-.login-box {
-    margin-top: 75px;
-    height: auto;
-    background: #1A2226;
-    text-align: center;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+/* Continue scoping the CSS rules to the login-container class */
+.login-container .login-key {
+  height: 100px;
+  font-size: 80px;
+  line-height: 100px;
+  background: -webkit-linear-gradient(#27ef9f, #0db8de);
+  -webkit-text-fill-color: transparent;
 }
 
 /* Login key styling */
 .login-key {
-    height: 100px;
-    font-size: 80px;
-    line-height: 100px;
-    background: -webkit-linear-gradient(#27EF9F, #0DB8DE);
-    -webkit-text-fill-color: transparent;
+  height: 100px;
+  font-size: 80px;
+  line-height: 100px;
+  background: -webkit-linear-gradient(#27ef9f, #0db8de);
+  -webkit-text-fill-color: transparent;
 }
 
 /* Login title styling */
 .login-title {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 30px;
-    letter-spacing: 2px;
-    font-weight: bold;
-    color: #ECF0F5; /* This should also be white if you want all text white */
+  margin-top: 15px;
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  color: white; /* Change to white */
 }
 
 /* Login form styling */
 .login-form {
-    margin-top: 25px;
-    text-align: left;
+  margin-top: 25px;
+  text-align: left;
 }
 
 /* Input fields styling */
-input[type=text],
-input[type=password] {
-    background-color: #1A2226;
-    border: none;
-    border-bottom: 2px solid #0DB8DE;
-    border-radius: 0;
-    font-weight: bold;
-    outline: none;
-    margin-bottom: 20px;
-    padding-left: 0;
-    color: black;
-    font-size: 16px; /* Increased font size */
+input[type="text"],
+input[type="password"] {
+  background-color: rgb(255, 255, 255); /* Set background color to black */
+  border: none;
+  border-bottom: 2px solid #0db8de;
+  border-radius: 0;
+  font-weight: bold;
+  outline: none;
+  margin-bottom: 20px;
+  padding-left: 0;
+  color: rgb(0, 0, 0); /* Set text color to white */
+  font-size: 16px; /* Increased font size */
 }
 
 /* Focus styling */
 .form-control:focus {
-    border-color: inherit;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-bottom: 2px solid #0DB8DE;
-    outline: 0;
-    background-color: #f2f7fa;
-    color: black;
+  border-color: inherit;
+  box-shadow: none; /* Remove box shadow */
+  border-bottom: 2px solid #0db8de;
+  outline: 0;
+  background-color: rgb(255, 255, 255); /* Retain black background on focus */
+  color: rgb(0, 0, 0); /* Retain white text on focus */
 }
 
 /* Button styling */
 .btn-outline-primary,
 .btn-outline-secondary {
-    background-color: white; /* White background */
-    color: black; /* Black text */
-    border: 2px solid black; /* Optional: Black border */
-    border-radius: 4px; /* Optional: rounded corners */
-    font-weight: bold;
-    padding: 10px 15px; /* Consistent padding */
-    margin: 5px; /* Optional: consistent margin between buttons */
-    text-align: left; /* Center the text */
+  background-color: white; /* White background */
+  color: black; /* Black text */
+  border: 2px solid black;
+  border-radius: 4px;
+  font-weight: bold;
+  padding: 10px 15px; /* Consistent padding */
+  margin: 5px; /* Optional: consistent margin between buttons */
+  text-align: left; /* Center the text */
 }
 
 /* Button hover effect */
 .btn-outline-primary:hover,
 .btn-outline-secondary:hover {
-    background-color: #f2f2f2; /* Slightly darker white on hover */
-    color: black; /* Keep black text on hover */
+  background-color: #f2f2f2; /* Slightly darker white on hover */
+  color: black; /* Keep black text on hover */
 }
 
 /* Container for buttons */
 .register-button {
-    text-align: left; /* Center the buttons */
-    margin-top: 20px; /* Add some space above the buttons */
+  text-align: left; /* Center the buttons */
+  margin-top: 20px; /* Add some space above the buttons */
 }
 
 /* Adjust text color */
 .register-text {
-    color: black;
+  color: white; /* Keep text color white */
 }
-
-
 
 /* Notification checkbox styling */
 .form-check-label {
-    color: white; /* White text */
+  color: white; /* White text */
 }
 
 .form-check-input {
-    border-radius: 4px;
-    border: 2px solid #0DB8DE;
+  border-radius: 4px;
+  border: 2px solid #0db8de;
+}
+
+/* Scoped to the login container */
+.login-container .login-box {
+  margin-top: 75px;
+  height: auto;
+  background: #1a2226;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+/* Other CSS rules for login page */
+.login-container .login-key {
+  height: 100px;
+  font-size: 80px;
+  line-height: 100px;
+  background: -webkit-linear-gradient(#27ef9f, #0db8de);
+  -webkit-text-fill-color: transparent;
+}
+
+/* Adjust text color */
+.register-text {
+  color: white; /* Keep text color white */
+}
+
+.form-control-label {
+  color: white;
+}
+
+.form-control {
+  background-color: white;
 }

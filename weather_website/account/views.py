@@ -67,6 +67,7 @@ def register(request):
     # If not POST, render the registration form
     return render(request, 'register.html')
 
+<<<<<<< HEAD
 
 
 
@@ -76,3 +77,10 @@ def login(request):
         # Get form data
         username = request.POST.get('username')
         password = request.POST.get('password1') 
+=======
+def login(request):
+    return render(request, 'login.html')
+
+def logout():
+    pass
+>>>>>>> d1d6d61e49bacc2e48451856dcdfb68be148ab27

@@ -67,11 +67,11 @@ def daily(request):
                         # Finding time
                         current_time = datetime.now().hour
                         hourly_time1, hourly_time2, hourly_time3, hourly_time4, hourly_time5 = timeFormat.timeFormatter(current_time)
-                        hourly_time1 = str(hourly_time1 + 1) + ":00"
-                        hourly_time2 = str(hourly_time1 + 2) + ":00"
-                        hourly_time3 = str(hourly_time1 + 3) + ":00"
-                        hourly_time4 = str(hourly_time1 + 4) + ":00"
-                        hourly_time5 = str(hourly_time1 + 5) + ":00"
+                        hourly_time1 = hourly_time1 + ":00"
+                        hourly_time2 = hourly_time2 + ":00"
+                        hourly_time3 = hourly_time3 + ":00"
+                        hourly_time4 = hourly_time4 + ":00"
+                        hourly_time5 = hourly_time5 + ":00"
                         # Filling Django Variables
                         context = {
                             'hourly_time1': hourly_time1,

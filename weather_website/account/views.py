@@ -40,6 +40,8 @@ def register(request):
             user.last_name = last_name    # Set last name in User
             user.save()
 
+            print(username)
+
             # Create the Account instance and associate it with the user
             account = Account(
                 user=user,
@@ -54,8 +56,7 @@ def register(request):
             authenticated_user = authenticate(request, username=username, password=password)
             if authenticated_user is not None:
                 login(request, authenticated_user)
-                
-                return render(request, 'index.html')
+                return render('')  # Redirect to account/info page
         except Exception as e:
             # Handle exceptions, such as user already existing
             messages.error(request, f'Error creating user or account: {e}')
@@ -66,3 +67,12 @@ def register(request):
     # If not POST, render the registration form
     return render(request, 'register.html')
 
+
+
+
+def login(request):
+    if request.method == 'POST':
+        print('post')
+        # Get form data
+        username = request.POST.get('username')
+        password = request.POST.get('password1') 

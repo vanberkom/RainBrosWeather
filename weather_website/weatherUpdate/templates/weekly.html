@@ -1,23 +1,35 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<div class="container">
-    <h1 class="my-4">Weekly Weather Forecast for {{ city }}</h1>
-    <div class="row">
-        {% for day in forecast_days %}
-        <div class="col-md-4 col-lg-3 mb-3">
-            <div class="card text-center">
-                <div class="card-header">{{ day.name }}</div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ day.temperature }}°F</h5>
-                    <img src="{{ day.icon }}" alt="Weather icon" class="img-fluid">
-                    <p class="card-text">{{ day.shortForecast }}</p>
-                </div>
-            </div>
-        </div>
-        {% empty %}
-        <p>No forecast data available.</p>
-        {% endfor %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/weekly.css'}">
+    <br>
+    <div class="text-title1">
+        <h1><strong>Weekly Weather</strong></h1>
     </div>
-</div>
+    <div class="panel-group">
+        <div class="panel panel-info">
+            <div class="panel-heading">{{ day1 }}</div>
+            <div class="panel-body">Temperature: </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">{{ day2 }}</div>
+            <div class="panel-body">Temperature: </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">{{ day3 }}</div>
+            <div class="panel-body">Temperature: </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">{{ day4 }}</div>
+            <div class="panel-body">Temperature: </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">{{ day5 }}</div>
+            <div class="panel-body">Temperature: </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">{{ day6 }}</div>
+            <div class="panel-body">Temperature: </div>
+          </div>
+    </div>
 {% endblock %}

@@ -1,5 +1,5 @@
 body {
-    background-image: url('/static/images/RainBros.jpg');
+    background-image: url('{% static "images/RainBros.jpg" %}');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -28,4 +28,19 @@ body {
 
 .jumbotron h1 {
     color: #337ab7;
+}
+
+.card {
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.img-fluid {
+    max-height: 100px; /* Limit the height of images to keep uniformity */
+    margin-bottom: 10px; /* Provide some spacing below the image */
 }

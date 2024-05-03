@@ -1,45 +1,60 @@
 {% extends 'base.html' %}
 {% block content %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/daily.css" rel="stylesheet">
     <div class="container">
       <h2>Today's Weather - {{ date }}</h2>
       <h5><strong>City:</strong> {{ city }}</h5>
       <h5><strong>Current Temperature:</strong> {{ temperature }}&deg;F</h5>
-      <h3><strong>Hourly Temperature:</strong></h3>
+      <h5><strong>Forecast: </strong>{{ shortForecast }}</h5>
+      <h2><strong>Hourly Temperature:</strong></h3>
     </div>
-
-    <div>
-      <img src="{{ hourly_pic1 }}" alt="hourly pic" />
-      <br>
-      <h5>Time: {{ hourly_time1 }}</h5>
-      <h5>Temperature: {{ hourly_temp1 }}&deg;F</h5>
-      <h5>Wind: {{ hourly_wind1 }} {{ hourly_winddir1 }}</h5>
-    </div>
-    <div>
-      <img src="{{ hourly_pic2 }}" alt="hourly pic" />
-      <br>
-      <h5>Time: {{ hourly_time2 }}</h5>
-      <h5>Temperature: {{ hourly_temp2 }}&deg;F</h5>
-      <h5>Wind: {{ hourly_wind2 }} {{ hourly_winddir2 }}</h5>
-    </div>
-    <div>
-      <img src="{{ hourly_pic3 }}" alt="hourly pic" />
-      <br>
-      <h5>Time: {{ hourly_time3 }}</h5>
-      <h5>Temperature: {{ hourly_temp3 }}&deg;F</h5>
-      <h5>Wind: {{ hourly_wind3 }} {{ hourly_winddir3 }}</h5>
-    </div>
-    <div>
-      <img src="{{ hourly_pic4 }}" alt="hourly pic" />
-      <br>
-      <h5>Time: {{ hourly_time4 }}</h5>
-      <h5>Temperature: {{ hourly_temp4 }}&deg;F</h5>
-      <h5>Wind: {{ hourly_wind4 }} {{ hourly_winddir4 }}</h5>
-    </div>
-    <div>
-      <img src="{{ hourly_pic5 }}" alt="hourly pic" />
-      <br>
-      <h5>Time: {{ hourly_time5 }}</h5>
-      <h5>Temperature: {{ hourly_temp5 }}&deg;F</h5>
-      <h5>Wind: {{ hourly_wind5 }} {{ hourly_winddir5 }}</h5>
-    </div>
+    
+      <div class="row scroll">
+          <div class="col">
+              <div class="card" style="width:200px">
+                  <img class="card-img-top" src="{{ hourly_pic1 }}" alt="Card image">
+                  <div class="card-body">
+                      <h4 class="card-title">{{ hourly_time1 }}</h4>
+                      <p class="card-text"><strong>Temp: </strong>{{ hourly_temp1 }}<br><strong>Wind: </strong>{{ hourly_wind1 }} {{ hourly_windir1 }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card" style="width:200px">
+                  <img class="card-img-top" src="{{ hourly_pic2 }}" alt="Card image">
+                  <div class="card-body">
+                      <h4 class="card-title">{{ hourly_time2 }}</h4>
+                      <p class="card-text"><strong>Temp: </strong>{{ hourly_temp2 }}<br><strong>Wind: </strong>{{ hourly_wind2 }} {{ hourly_windir2 }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card" style="width:200px">
+                  <img class="card-img-top" src="{{ hourly_pic3 }}" alt="Card image">
+                  <div class="card-body">
+                      <h4 class="card-title">{{ hourly_time3 }}</h4>
+                      <p class="card-text"><strong>Temp: </strong>{{ hourly_temp3 }}<br><strong>Wind: </strong>{{ hourly_wind3 }} {{ hourly_windir3 }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card" style="width:200px">
+                  <img class="card-img-top" src="{{ hourly_pic4 }}" alt="Card image">
+                  <div class="card-body">
+                      <h4 class="card-title">{{ hourly_time4 }}</h4>
+                      <p class="card-text"><strong>Temp: </strong>{{ hourly_temp4 }}<br><strong>Wind: </strong>{{ hourly_wind4 }} {{ hourly_windir4 }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card" style="width:200px">
+                  <img class="card-img-top" src="{{ hourly_pic5 }}" alt="Card image">
+                  <div class="card-body">
+                      <h4 class="card-title">{{ hourly_time5 }}</h4>
+                      <p class="card-text"><strong>Temp: </strong>{{ hourly_temp5 }}<br><strong>Wind: </strong>{{ hourly_wind5 }} {{ hourly_windir5 }}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
 {% endblock %}

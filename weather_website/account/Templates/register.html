@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}  
+<link rel="stylesheet" href="{% static 'css/registerFile.css' %}">
+<div class="container">
+    <h2 id="heading">Register</h2>
+    <form method="POST" action="{% url 'register' %}" class="form">
+        {% csrf_token %}
+        
+        <!-- First Name -->
+        <div class="field">
+            <label for="first_name" class="form-label">First Name:</label>
+            <input name="first_name" type="text" class="input-field" id="first_name" required>
+        </div>
+
+        <!-- Last Name -->
+        <div class="field">
+            <label for="last_name" class="form-label">Last Name:</label>
+            <input name="last_name" type="text" class="input-field" id="last_name" required>
+        </div>
+
+        <!-- Username -->
+        <div class="field">
+            <label for="username" class="form-label">Username:</label>
+            <input name="username" type="text" class="input-field" id="username" required>
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+            <label for="password1" class="form-label">Password:</label>
+            <input name="password1" type="password" class="input-field" id="password1" required>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="field">
+            <label for="password2" class="form-label">Confirm Password:</label>
+            <input name="password2" type="password" class="input-field" id="password2" required>
+        </div>
+
+        <!-- Notifications Checkbox -->
+        <div class="field">
+            <input name="notifications" type="checkbox" class="form-check-input" id="notifications" onchange="togglePhoneNumberInput()">
+            <label class="form-check-label" for="notifications">Receive notifications</label>
+        </div>
+
+        <!-- Phone Number (initially hidden) -->
+        <div class="field" id="phone_number_div" style="display: none;">
+            <label for="phone_number" class="form-label">Phone Number:</label>
+            <input name="phone_number" type="text" class="input-field" id="phone_number">
+        </div>
+
+        <!-- Form Buttons -->
+        <div class="btn-group">
+            <button href="" type="submit" class="button1">Register</button>
+            <a href="{% url 'login' %}" class="button3">Login</a>
+        </div>
+    </form>
+
+    <!-- JavaScript to toggle phone number input visibility -->
+    <script>
+        function togglePhoneNumberInput() {
+            const checkbox = document.getElementById('notifications');
+            const phoneNumberDiv = document.getElementById('phone_number_div');
+            phoneNumberDiv.style.display = checkbox.checked ? 'block' : 'none';
+        }
+    </script>
+</div>
+{% endblock %}

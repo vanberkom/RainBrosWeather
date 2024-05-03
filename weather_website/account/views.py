@@ -56,7 +56,7 @@ def register(request):
             authenticated_user = authenticate(request, username=username, password=password)
             if authenticated_user is not None:
                 login(request, authenticated_user)
-                return redirect('index')  # Redirect to account/info page
+                return render('')  # Redirect to account/info page
         except Exception as e:
             # Handle exceptions, such as user already existing
             messages.error(request, f'Error creating user or account: {e}')

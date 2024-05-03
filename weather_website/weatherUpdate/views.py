@@ -2,8 +2,7 @@ from django.shortcuts import render
 import requests
 from datetime import datetime
 from datetime import date
-from . import zipToCord
-from django.utils.timezone import timezone
+from . import zipToCord,timeFormat
 
 # Create your views here.
 def index(request):
@@ -38,10 +37,12 @@ def daily(request):
                     
                     today = date.today()
                     todays_date = today.strftime('%A, %B %d')
+                    
                     response = requests.get(hourly_url)
                     if response.status_code == 200:
                         results = response.json()
 
+                        # Getting api hourly data
                         hourly_temp1 = results['properties']['periods'][0]['temperature']
                         hourly_pic1 = results['properties']['periods'][0]['icon']
                         hourly_wind1 = results['properties']['periods'][0]['windSpeed']
@@ -64,16 +65,14 @@ def daily(request):
                         hourly_winddir5 = results['properties']['periods'][4]['windDirection']
                         
                         # Finding time
-                        current_hour = datetime.ctime
-
-                        
-                        
-                        
-                        hourly_time1 = current_hour
-                        hourly_time2 = current_hour
-                        hourly_time3 = current_hour
-                        hourly_time4 = current_hour
-                        hourly_time5 = current_hour
+                        current_time = datetime.now().hour
+                        hourly_time1, hourly_time2, hourly_time3, hourly_time4, hourly_time5 = timeFormat.timeFormatter(current_time)
+                        hourly_time1 = str(hourly_time1 + 1) + ":00"
+                        hourly_time2 = str(hourly_time1 + 2) + ":00"
+                        hourly_time3 = str(hourly_time1 + 3) + ":00"
+                        hourly_time4 = str(hourly_time1 + 4) + ":00"
+                        hourly_time5 = str(hourly_time1 + 5) + ":00"
+                        # Filling Django Variables
                         context = {
                             'hourly_time1': hourly_time1,
                             'hourly_temp1': hourly_temp1,
@@ -101,13 +100,15 @@ def daily(request):
                             'hourly_wind5': hourly_wind5,
                             'hourly_winddir5': hourly_winddir5,
                         }
+                    # Adding city variables to django context
                     c2 = {
                         'city': city,
                         'temperature': temperature,
                         'date': todays_date,
                     }
+                    # Combining the contexts
                     context = context | c2
-                    
+                    # Rendering the daily html with the information
                     return render(request, 'daily.html', context=context)
                 
                 else:

@@ -3,6 +3,7 @@ import requests
 from datetime import datetime
 from datetime import date
 from . import zipToCord
+from django.utils.timezone import timezone
 
 # Create your views here.
 def index(request):
@@ -63,14 +64,16 @@ def daily(request):
                         hourly_winddir5 = results['properties']['periods'][4]['windDirection']
                         
                         # Finding time
-                        current_time = datetime.now()
-                        current_hour = current_time.hour
-                        current_hour = current_hour - 17
-                        hourly_time1 = str(current_hour) + ":00"
-                        hourly_time2 = str(current_hour + 1) + ":00"
-                        hourly_time3 = str(current_hour + 2) + ":00"
-                        hourly_time4 = str(current_hour + 3) + ":00"
-                        hourly_time5 = str(current_hour + 4) + ":00"
+                        current_hour = datetime.ctime
+
+                        
+                        
+                        
+                        hourly_time1 = current_hour
+                        hourly_time2 = current_hour
+                        hourly_time3 = current_hour
+                        hourly_time4 = current_hour
+                        hourly_time5 = current_hour
                         context = {
                             'hourly_time1': hourly_time1,
                             'hourly_temp1': hourly_temp1,
@@ -160,18 +163,3 @@ def affirmation(request):
         author = ""
         print(f"API request failed: {e}")
     return render(request, 'affirmation.html', {'quote': quote})
-
-
-
-def affirmation(request):
-    try:
-        response = requests.get('https://zenquotes.io/api/random')
-        data = response.json()
-        quote = data[0]['q']  # Quote text
-        author = data[0]['a']  # Author of the quote
-    except Exception as e:
-        quote = "No affirmation available at the moment."
-        author = ""
-        print(f"API request failed: {e}")
-    return render(request, 'affirmation.html', {'quote': quote})
-    

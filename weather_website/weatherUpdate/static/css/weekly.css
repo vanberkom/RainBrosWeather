@@ -1,0 +1,9 @@
+.carousel-caption {
+    top: 50%;
+    transform: translateY(-50%);
+    color: black;
+}
+
+.text-title1 {
+    text-align: center;
+}

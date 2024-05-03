@@ -127,7 +127,7 @@ def weekly(request):
     zip_code = request.GET.get('zipcode', None)
     context = {}
     if zip_code:
-        city, lat, lon = ZipToCity(zip_code)
+        city, lat, lon = zipToCord.ZipToCity(zip_code)
         if lat and lon:
             input_url = f'https://api.weather.gov/points/{lat},{lon}'
             response = requests.get(input_url)

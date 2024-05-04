@@ -33,8 +33,12 @@
                     </span>
                 </div>
             </form>
-            <p>Don’t have an account? <a href="/account/register">Sign up here</a></p>
-            <p>Already have an account? <a href="/account/login">Login here</a></p>
+            {% if user.is_authenticated %}
+            {% else %}
+                <p>Don’t have an account? <a href="/account/register">Sign up here</a></p>
+                <p>Already have an account? <a href="/account/login">Login here</a></p>
+            {% endif %}
+            
         </div>
     </div>
 </body>

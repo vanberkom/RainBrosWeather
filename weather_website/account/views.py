@@ -3,12 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from .models import Account
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
-from django.contrib import messages
-from .models import Account
 from weatherUpdate.views import index
+from django.contrib.auth.forms import AuthenticationForm
 
 def register(request):
     if request.method == 'POST':
@@ -67,7 +63,30 @@ def register(request):
     return render(request, 'register.html')
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data['user_name'],
+                password=form.cleaned_data['password'],
+            )
+            if user is not None:
+                login(request, user)
+                messages.success(request, f"Hello <b>{user.username}</b>! You have been logged in")
+                return redirect('index')
+
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error) 
+
+    form = AuthenticationForm() 
+    
     return render(request, 'login.html')
 
-def logout():
-    pass
+def logout(request):
+    logout(request)
+    messages.info(request, "Logged out successfully!")
+    return redirect('index')

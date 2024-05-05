@@ -46,7 +46,7 @@ def register(request):
             )
             account.save()
 
-            # Authenticate and log in the user
+            # Authenticate and log in the user 
             authenticated_user = authenticate(request, username=username, password=password)
             if authenticated_user is not None:
                 login(request, authenticated_user)
@@ -62,7 +62,8 @@ def register(request):
     # If not POST, render the registration form
     return render(request, 'register.html')
 
-def login(request):
+#View to authenticate a users login credientials
+def login_view(request):
     if request.user.is_authenticated:
         return redirect('index')
 
@@ -70,12 +71,13 @@ def login(request):
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
             user = authenticate(
-                username=form.cleaned_data['user_name'],
+                username=form.cleaned_data['username'],
                 password=form.cleaned_data['password'],
             )
             if user is not None:
                 login(request, user)
                 messages.success(request, f"Hello <b>{user.username}</b>! You have been logged in")
+                messages.info
                 return redirect('index')
 
         else:

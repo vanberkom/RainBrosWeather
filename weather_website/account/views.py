@@ -103,6 +103,7 @@ def info_view(request):
         'first_name' : acc.first_name,
         'last_name' : acc.last_name,
         'phone_number' : acc.phone_number,
+        'notifications': acc.notifications,
     }
 
     return render(request, 'info.html', context)
@@ -110,18 +111,20 @@ def info_view(request):
 def update(request):
     user = request.user
     acc = get_object_or_404(Account, user=user)
-    
+
     if request.method == 'POST':
-        # Assuming the form fields are named 'notifications' and 'phone_number'
-        notifications = request.POST.get('notifications', False)  # False is the default value
         phone_number = request.POST.get('phone_number', '')
+        notifications = 'notifications' in request.POST
+
+        if not notifications:
+            phone_number = ''  # Clear phone number if notifications are not wanted
 
         acc.phone_number = phone_number
         acc.notifications = notifications
         acc.save()
-        # You might want to render a response here or redirect somewhere else
-        return info_view(request)
+
+        messages.success(request, 'Account updated successfully.')
+        return redirect('info')
     else:
-        # Handle GET request (render the form)
         return info_view(request)
 

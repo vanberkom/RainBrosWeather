@@ -111,13 +111,19 @@ def info_view(request):
 def update(request):
     user = request.user
     acc = get_object_or_404(Account, user=user)
-    
+
     if request.method == 'POST':
-        acc.phone_number = request.POST.get('phone_number', '')
-        acc.notifications = 'notifications' in request.POST
+        phone_number = request.POST.get('phone_number', '')
+        notifications = 'notifications' in request.POST
+
+        if not notifications:
+            phone_number = ''  # Clear phone number if notifications are not wanted
+
+        acc.phone_number = phone_number
+        acc.notifications = notifications
         acc.save()
+
         messages.success(request, 'Account updated successfully.')
         return redirect('info')
     else:
-        return render(request, 'info.html', {'acc': acc})
-
+        return info_view(request)

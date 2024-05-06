@@ -1,0 +1,17 @@
+.jumbotron {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('https://www.lifewire.com/thmb/-0iQ_uPWNKUdqKfKIWJgdKeSwpg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/windows-xp-bsod-error-5aa11f3443a1030036c5bdb9.PNG');
+    background-size: cover;
+    background-position: center;
+}

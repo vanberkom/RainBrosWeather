@@ -52,7 +52,7 @@ def register(request):
             authenticated_user = authenticate(request, username=username, password=password)
             if authenticated_user is not None:
                 login(request, authenticated_user)
-                return render('')  # Redirect to account/info page
+                return render(request, 'index.html')  # Redirect to account/info page
         except Exception as e:
             # Handle exceptions, such as user already existing
             messages.error(request, f'Error creating user or account: {e}')
@@ -111,20 +111,13 @@ def info_view(request):
 def update(request):
     user = request.user
     acc = get_object_or_404(Account, user=user)
-
+    
     if request.method == 'POST':
-        phone_number = request.POST.get('phone_number', '')
-        notifications = 'notifications' in request.POST
-
-        if not notifications:
-            phone_number = ''  # Clear phone number if notifications are not wanted
-
-        acc.phone_number = phone_number
-        acc.notifications = notifications
+        acc.phone_number = request.POST.get('phone_number', '')
+        acc.notifications = 'notifications' in request.POST
         acc.save()
-
         messages.success(request, 'Account updated successfully.')
         return redirect('info')
     else:
-        return info_view(request)
+        return render(request, 'info.html', {'acc': acc})
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -92,3 +92,12 @@ def logout_view(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect('index')
+
+def info_view(request):
+    user = request.user
+    account = Account.objects.model(request)
+    context = {
+        'account' : account
+    }
+
+    return render(request, 'info.html', context)

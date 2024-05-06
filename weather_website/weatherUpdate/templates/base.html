@@ -15,6 +15,9 @@
       .content {
         padding-top: 50px;
       }
+      .textnav {
+        font-size: 18px;
+      }
     </style>
   </head>
   <body>
@@ -44,7 +47,7 @@
             </div>
           </div>
         </form>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav textnav">
           <li>
             <a href="{% url 'daily' %}?zipcode={{ request.GET.zipcode }}"
               >Daily Weather</a
@@ -60,6 +63,7 @@
           <li><a href="{% url 'logout' %}?zipcode={{ request.GET.zipcode }}">Logout</a></li>
           {% else %}
           <li><a href="{% url 'login' %}?zipcode={{ request.GET.zipcode }}">Login</a></li>
+          <li><a href="{% url 'register' %}?zipcode={{ request.GET.zipcode }}">Register</a></li>
           {% endif %}
         </ul>
       </div>

@@ -1,26 +1,10 @@
-{% extends 'base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=
-    , initial-scale=1.0"
-    />
-    <title>Account Information</title>
-  </head>
-  <body>
-    <p>Username: {{ account.user.username }}</p>
-    <p>First Name: {{ account.first_name }}</p>
-    <p>Last Name: {{ account.last_name }}</p>
-    <p>Phone Number: {{ account.phone_number }}</p>
-    <p>Notifications: 
-        {% if account.notifications %}
-            Enabled
-        {% else %}
-            Disabled
-        {% endif %}
-    </p>
-      </body>
-</html>
+{% extends 'base.html' %} {% block content %}
+<div class="container accountBody">
+  <p>Username: {{ username }}</p>
+  <p>First Name: {{ first_name }}</p>
+  <p>Last Name: {{ last_name }}</p>
+  <p>Phone Number: {{ phone_number }}</p>
+  <p>Notifications: {{ choice }}</p>
+</div>
+
+{% endblock %}

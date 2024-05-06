@@ -95,9 +95,19 @@ def logout_view(request):
 
 def info_view(request):
     user = request.user
-    account = Account.objects.model(request)
+    acc = get_object_or_404(Account, user=user)
+
+    if acc.notifications == True:
+        choice = 'Enabled'
+    else:
+        choice = 'Disabled'
+    
     context = {
-        'account' : account
+        'username' : user.username,
+        'first_name' : acc.first_name,
+        'last_name' : acc.last_name,
+        'phone_number' : acc.phone_number,
+        'notifications' : choice,
     }
 
     return render(request, 'info.html', context)

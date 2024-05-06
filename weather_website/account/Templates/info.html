@@ -12,40 +12,26 @@
                 <p><strong>Username:</strong> {{ username }}</p>
                 <p><strong>First Name:</strong> {{ first_name }}</p>
                 <p><strong>Last Name:</strong> {{ last_name }}</p>
-                {% if phone_number %}
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input">
-                    
+                <form method="POST" action="{% url 'update' %}">
+                  {% csrf_token %}
+                  <div class="form-check">
+                    <input type="checkbox" name="notifications" class="form-check-input" id="notifications" />
+                    <label class="form-check-label" for="notifications">Receive notifications</label>
+                  </div>
+                  <div class="form-group" id="phone_number_div">
+                    <label class="form-control-label" for="phone_number">Phone Number:</label>
+                    <input type="text" name="phone_number" class="form-control" value="{{ phone_number }}" id="phone_number" />
+                  </div>
+                </form>
+                <div class="col-lg-6">
+                  <a href="{% url 'update' %}" class="btn btn-outline-secondary">Update</a>
                 </div>
-                    <p><strong>Phone Number:</strong> {{ phone_number }}</p>
-                {% endif %}
-                <div class="form-check">
-                    <input type="checkbox"
-                           class="form-check-input"
-                           id="notifications"
-                           name="notifications"
-                           {% if phone_number %}
-                               checked
-                           {% endif %}
-                           onchange="togglePhoneNumberInput()"/>
-                    <label class="form-check-label" for="notifications">
-                        Receive notifications
-                    </label>
+                <div class="col-lg-6">
+                  <a href="{% url 'index' %}" class="btn btn-outline-secondary">Go Back</a>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-2"></div>
     </div>
 </div>
-
 {% endblock %}
-
-<script>
-function togglePhoneNumberInput() {
-    // Function to toggle the phone number input based on checkbox state
-    const checkbox = document.getElementById('notifications');
-    const phoneNumberDiv = document.getElementById('phone_number_div');
-    phoneNumberDiv.style.display = checkbox.checked ? 'block' : 'none';
-}
-</script>
 

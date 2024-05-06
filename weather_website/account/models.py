@@ -15,4 +15,4 @@ class Account(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=16, blank=True) # Validators should be a list
     
     def __str__(self):
-        return self.first_name    
+        return self.first_name   

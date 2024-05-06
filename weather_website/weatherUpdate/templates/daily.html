@@ -22,30 +22,35 @@
             </div>
         </div>
     </div>
-    <div class="center jumbotron">
-      <h3><strong>Weekly Weather for {{ city }}</strong></h3>
-    </div>
+    <div class="center jumbotron newwid">
+      <h3><strong>Hourly Weather for {{ city }}</strong></h3>
     
-      <div class="row center">
-          <div class="col-sm-2">
+    
+      <div class="rowcont">
+          <div class="colsolo">
                 <h3>{{ hourly_time1 }}</h4>
-                <h4><strong>Temp: </strong>{{ hourly_temp1 }}<br><strong>Wind: </strong>{{ hourly_wind1 }} {{ hourly_windir1 }}</h4>
+                <h5><strong>Temp: </strong>{{ hourly_temp1 }}&deg;F<br><strong>Wind: </strong>{{ hourly_wind1 }} {{ hourly_windir1 }}</h5>
           </div>
-          <div class="col-sm-2">
+          <div class="colsolo">
             <h3>{{ hourly_time2 }}</h3>
-            <h4><strong>Temp: </strong>{{ hourly_temp2 }}<br><strong>Wind: </strong>{{ hourly_wind2 }} {{ hourly_windir2 }}</h4>
+            <h5><strong>Temp: </strong>{{ hourly_temp2 }}&deg;F<br><strong>Wind: </strong>{{ hourly_wind2 }} {{ hourly_windir2 }}</h5>
           </div>
-          <div class="col-sm-2">
+          <div class="colsolo">
             <h3>{{ hourly_time3 }}</h3>
-            <h4><strong>Temp: </strong>{{ hourly_temp3 }}<br><strong>Wind: </strong>{{ hourly_wind3 }} {{ hourly_windir3 }}</h4>
+            <h5><strong>Temp: </strong>{{ hourly_temp3 }}&deg;F<br><strong>Wind: </strong>{{ hourly_wind3 }} {{ hourly_windir3 }}</h5>
           </div>
-          <div class="col-sm-2">
+          <div class="colsolo">
             <h3>{{ hourly_time4 }}</h3>
-            <h4><strong>Temp: </strong>{{ hourly_temp4 }}<br><strong>Wind: </strong>{{ hourly_wind4 }} {{ hourly_windir4 }}</h4>
+            <h5><strong>Temp: </strong>{{ hourly_temp4 }}&deg;F<br><strong>Wind: </strong>{{ hourly_wind4 }} {{ hourly_windir4 }}</h5>
           </div>
-          <div class="col-sm-2">
+          <div class="colsolo">
             <h3>{{ hourly_time5 }}</h3>
-            <h4><strong>Temp: </strong>{{ hourly_temp5 }}<br><strong>Wind: </strong>{{ hourly_wind5 }} {{ hourly_windir5 }}</h4>
+            <h5><strong>Temp: </strong>{{ hourly_temp5 }}&deg;F<br><strong>Wind: </strong>{{ hourly_wind5 }} {{ hourly_windir5 }}</h5>
+          </div>
+          <div class="colsolo">
+            <h3>{{ hourly_time6 }}</h3>
+            <h5><strong>Temp: </strong>{{ hourly_temp6 }}&deg;F<br><strong>Wind: </strong>{{ hourly_wind6 }} {{ hourly_windir6 }}</h5>
           </div>
       </div>
+    </div>
 {% endblock %}

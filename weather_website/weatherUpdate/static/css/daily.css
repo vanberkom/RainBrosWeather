@@ -1,6 +1,6 @@
 .center {
     margin: auto;
-    width: 50%;
+    width: 75%;
     text-align: center;
 }
 
@@ -8,4 +8,20 @@
     width: 75%;
     height: 75%;
     object-fit: cover;
+}
+
+.rowcont {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    text-align: center;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-size: cover;
+    background-position: center;
 }

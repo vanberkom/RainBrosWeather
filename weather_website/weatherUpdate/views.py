@@ -59,61 +59,60 @@ def daily(request):
 
                         # Getting api hourly data
                         hourly_temp1 = results['properties']['periods'][0]['temperature']
-                        hourly_pic1 = results['properties']['periods'][0]['icon']
                         hourly_wind1 = results['properties']['periods'][0]['windSpeed']
                         hourly_winddir1 = results['properties']['periods'][0]['windDirection']
                         hourly_temp2 = results['properties']['periods'][1]['temperature']
-                        hourly_pic2 = results['properties']['periods'][1]['icon']
                         hourly_wind2 = results['properties']['periods'][1]['windSpeed']
                         hourly_winddir2 = results['properties']['periods'][1]['windDirection']
                         hourly_temp3 = results['properties']['periods'][2]['temperature']
-                        hourly_pic3 = results['properties']['periods'][2]['icon']
                         hourly_wind3 = results['properties']['periods'][2]['windSpeed']
                         hourly_winddir3 = results['properties']['periods'][2]['windDirection']
                         hourly_temp4 = results['properties']['periods'][3]['temperature']
-                        hourly_pic4 = results['properties']['periods'][3]['icon']
                         hourly_wind4 = results['properties']['periods'][3]['windSpeed']
                         hourly_winddir4 = results['properties']['periods'][3]['windDirection']
                         hourly_temp5 = results['properties']['periods'][4]['temperature']
-                        hourly_pic5 = results['properties']['periods'][4]['icon']
                         hourly_wind5 = results['properties']['periods'][4]['windSpeed']
                         hourly_winddir5 = results['properties']['periods'][4]['windDirection']
+                        hourly_temp6 = results['properties']['periods'][5]['temperature']
+                        hourly_wind6 = results['properties']['periods'][5]['windSpeed']
+                        hourly_winddir6 = results['properties']['periods'][5]['windDirection']
                         
                         # Finding time
                         current_time = datetime.now().hour
-                        hourly_time1, hourly_time2, hourly_time3, hourly_time4, hourly_time5 = timeFormat.timeFormatter(current_time)
+                        hourly_time1, hourly_time2, hourly_time3, hourly_time4, hourly_time5, hourly_time6 = timeFormat.timeFormatter(current_time)
                         hourly_time1 = hourly_time1 + ":00"
                         hourly_time2 = hourly_time2 + ":00"
                         hourly_time3 = hourly_time3 + ":00"
                         hourly_time4 = hourly_time4 + ":00"
                         hourly_time5 = hourly_time5 + ":00"
+                        hourly_time6 = hourly_time6 + ":00"
+                        
                         # Filling Django Variables
                         context = {
                             'hourly_time1': hourly_time1,
                             'hourly_temp1': hourly_temp1,
-                            'hourly_pic1': hourly_pic1,
                             'hourly_wind1': hourly_wind1,
                             'hourly_winddir1': hourly_winddir1,
                             'hourly_time2': hourly_time2,
                             'hourly_temp2': hourly_temp2,
-                            'hourly_pic2': hourly_pic2,
                             'hourly_wind2': hourly_wind2,
                             'hourly_winddir2': hourly_winddir2,
                             'hourly_time3': hourly_time3,
                             'hourly_temp3': hourly_temp3,
-                            'hourly_pic3': hourly_pic3,
                             'hourly_wind3': hourly_wind3,
                             'hourly_winddir3': hourly_winddir3,
                             'hourly_time4': hourly_time4,
                             'hourly_temp4': hourly_temp4,
-                            'hourly_pic4': hourly_pic4,
                             'hourly_wind4': hourly_wind4,
                             'hourly_winddir4': hourly_winddir4,
                             'hourly_time5': hourly_time5,
                             'hourly_temp5': hourly_temp5,
-                            'hourly_pic5': hourly_pic5,
                             'hourly_wind5': hourly_wind5,
                             'hourly_winddir5': hourly_winddir5,
+                            'hourly_time6': hourly_time6,
+                            'hourly_temp6': hourly_temp6,
+                            'hourly_wind6': hourly_wind6,
+                            'hourly_winddir6': hourly_winddir6,
                         }
                     # Adding city variables to django context
                     c2 = {

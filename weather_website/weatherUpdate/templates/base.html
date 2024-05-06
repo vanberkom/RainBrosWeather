@@ -63,6 +63,7 @@
           <li><a href="{% url 'logout' %}?zipcode={{ request.GET.zipcode }}">Logout</a></li>
           {% else %}
           <li><a href="{% url 'login' %}?zipcode={{ request.GET.zipcode }}">Login</a></li>
+          <li><a href="{% url 'register' %}?zipcode={{ request.GET.zipcode }}">Register</a></li>
           {% endif %}
         </ul>
       </div>

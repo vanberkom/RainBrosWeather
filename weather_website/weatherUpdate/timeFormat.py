@@ -34,5 +34,5 @@ def timeFormatter(time):
         time3 = 22
         time4 = 23
         time5 = 0
-    return str(time), str(time1), str(time2), str(time3), str(time4)
+    return str(time), str(time1), str(time2), str(time3), str(time4), str(time5)
 

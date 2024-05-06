@@ -18,7 +18,7 @@
     </style>
   </head>
   <body>
-    <nav class="navbar bg-info navbar-fixed-top"> 
+    <nav class="navbar bg-info navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-a">
           <a class="navbar-brand" href="{% url 'index' %}">RainBro's Weather</a>
@@ -56,12 +56,12 @@
             >
           </li>
           {% if user.is_authenticated %}
-          <li> <a href="{% url 'logout' %}">Logout</a></li>
-          <li> <a href="{% url 'info' %}">Logout</a></li>
+          <li><a href="{% url 'info' %}?zipcode={{ request.GET.zipcode }}">Account Information</a></li>
+          <li><a href="{% url 'logout' %}?zipcode={{ request.GET.zipcode }}">Logout</a></li>
           {% else %}
-          <li> <a href="{% url 'login' %}">Login</a></li>
+          <li><a href="{% url 'login' %}?zipcode={{ request.GET.zipcode }}">Login</a></li>
           {% endif %}
-          </ul>
+        </ul>
       </div>
     </nav>
     <div class="content">

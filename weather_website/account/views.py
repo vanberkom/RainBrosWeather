@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -92,3 +92,22 @@ def logout_view(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect('index')
+
+def info_view(request):
+    user = request.user
+    acc = get_object_or_404(Account, user=user)
+
+    if acc.notifications == True:
+        choice = 'Enabled'
+    else:
+        choice = 'Disabled'
+    
+    context = {
+        'username' : user.username,
+        'first_name' : acc.first_name,
+        'last_name' : acc.last_name,
+        'phone_number' : acc.phone_number,
+        'notifications' : choice,
+    }
+
+    return render(request, 'info.html', context)

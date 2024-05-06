@@ -33,7 +33,7 @@
         font-size: 30px;
         letter-spacing: 2px;
         font-weight: bold;
-        color: #ECF0F5; /* This should also be white if you want all text white */
+        color: #ECF0F5; 
     }
 
     /* Register form styling */
@@ -76,7 +76,7 @@
         border-radius: 4px;
         font-weight: bold;
         padding: 10px 15px; /* Consistent padding */
-        margin: 5px; /* Optional: consistent margin between buttons */
+        margin: 5px; 
         text-align: left; /* Center the text */
     }
 

@@ -1,12 +1,10 @@
-{% extends 'base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html' %} {% block content %}
+<div class="container accountBody">
+  <p>Username: {{ username }}</p>
+  <p>First Name: {{ first_name }}</p>
+  <p>Last Name: {{ last_name }}</p>
+  <p>Phone Number: {{ phone_number }}</p>
+  <p>Notifications: {{ choice }}</p>
+</div>
+
+{% endblock %}

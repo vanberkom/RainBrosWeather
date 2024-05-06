@@ -15,10 +15,13 @@
       .content {
         padding-top: 50px;
       }
+      .textnav {
+        font-size: 18px;
+      }
     </style>
   </head>
   <body>
-    <nav class="navbar bg-info navbar-fixed-top"> 
+    <nav class="navbar bg-info navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-a">
           <a class="navbar-brand" href="{% url 'index' %}">RainBro's Weather</a>
@@ -44,7 +47,7 @@
             </div>
           </div>
         </form>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav textnav">
           <li>
             <a href="{% url 'daily' %}?zipcode={{ request.GET.zipcode }}"
               >Daily Weather</a
@@ -56,12 +59,13 @@
             >
           </li>
           {% if user.is_authenticated %}
-          <li> <a href="{% url 'index' %}">Logout</a></li>
-          
+          <li><a href="{% url 'info' %}?zipcode={{ request.GET.zipcode }}">Account Information</a></li>
+          <li><a href="{% url 'logout' %}?zipcode={{ request.GET.zipcode }}">Logout</a></li>
           {% else %}
-          <li> <a href="{% url 'login' %}">Login</a></li>
+          <li><a href="{% url 'login' %}?zipcode={{ request.GET.zipcode }}">Login</a></li>
+          <li><a href="{% url 'register' %}?zipcode={{ request.GET.zipcode }}">Register</a></li>
           {% endif %}
-          </ul>
+        </ul>
       </div>
     </nav>
     <div class="content">

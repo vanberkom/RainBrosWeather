@@ -1,14 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
-from django.contrib import messages
-from .models import Account
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .models import Account
 from weatherUpdate.views import index
+from django.contrib.auth.forms import AuthenticationForm
 
 def register(request):
     if request.method == 'POST':
@@ -52,7 +48,7 @@ def register(request):
             )
             account.save()
 
-            # Authenticate and log in the user
+            # Authenticate and log in the user 
             authenticated_user = authenticate(request, username=username, password=password)
             if authenticated_user is not None:
                 login(request, authenticated_user)
@@ -67,8 +63,65 @@ def register(request):
     # If not POST, render the registration form
     return render(request, 'register.html')
 
-def login(request):
+#View to authenticate a users login credientials
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+            )
+            if user is not None:
+                login(request, user)
+                messages.success(request, f"Hello <b>{user.username}</b>! You have been logged in")
+                messages.info
+                return redirect('index')
+
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error) 
+
+    form = AuthenticationForm() 
+    
     return render(request, 'login.html')
 
-def logout():
-    pass
+def logout_view(request):
+    logout(request)
+    messages.info(request, "Logged out successfully!")
+    return redirect('index')
+
+def info_view(request):
+    user = request.user
+    acc = get_object_or_404(Account, user=user)
+
+    context = {
+        'username' : user.username,
+        'first_name' : acc.first_name,
+        'last_name' : acc.last_name,
+        'phone_number' : acc.phone_number,
+    }
+
+    return render(request, 'info.html', context)
+
+def update(request):
+    user = request.user
+    acc = get_object_or_404(Account, user=user)
+    
+    if request.method == 'POST':
+        # Assuming the form fields are named 'notifications' and 'phone_number'
+        notifications = request.POST.get('notifications', False)  # False is the default value
+        phone_number = request.POST.get('phone_number', '')
+
+        acc.phone_number = phone_number
+        acc.notifications = notifications
+        acc.save()
+        # You might want to render a response here or redirect somewhere else
+        return info_view(request)
+    else:
+        # Handle GET request (render the form)
+        return info_view(request)
+

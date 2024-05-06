@@ -1,4 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Inputted zip code doesn't exist.</h1>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/error.css' %}">
+<div class="jumbotron">
+    <h1>Didn't input a correct zip code.</h1>
+</div>
+
 {% endblock %}

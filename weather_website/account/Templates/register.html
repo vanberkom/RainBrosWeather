@@ -1,136 +1,59 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/registerFile.css' %}" />
 
-<div class="container">
-  <link rel="stylesheet" href="{% static 'css/registerFile.css' %}" />
-
+<div class="container registerBody">
   <div class="row">
     <div class="col-lg-3 col-md-2"></div>
     <div class="col-lg-6 col-md-8 register-box">
       <div class="col-lg-12 register-key">
         <i class="fa fa-user" aria-hidden="true"></i>
-        <!-- Optional icon, you can change it -->
       </div>
       <div class="col-lg-12 register-title">Register</div>
-
       <div class="col-lg-12 register-form">
-        <div class="col-lg-12 register-form">
-          <form method="POST" action="{% url 'register' %}">
-            {% csrf_token %}
-
-            <!-- First Name -->
-            <div class="form-group">
-              <label for="first_name" class="form-control-label"
-                >First Name:</label
-              >
-              <input
-                type="text"
-                name="first_name"
-                class="form-control"
-                id="first_name"
-                required
-              />
+        <form method="POST" action="{% url 'register' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label class="form-control-label" for="first_name">First Name:</label>
+            <input type="text" name="first_name" class="form-control" id="first_name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="last_name">Last Name:</label>
+            <input type="text" name="last_name" class="form-control" id="last_name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="username">Username:</label>
+            <input type="text" name="username" class="form-control" id="username" required />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="password1">Password:</label>
+            <input type="password" name="password1" class="form-control" id="password1" required />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="password2">Confirm Password:</label>
+            <input type="password" name="password2" class="form-control" id="password2" required />
+          </div>
+          <div class="form-check">
+            <input type="checkbox" name="notifications" class="form-check-input" id="notifications" onchange="togglePhoneNumberInput()" />
+            <label class="form-check-label" for="notifications">Receive notifications</label>
+          </div>
+          <div class="form-group" id="phone_number_div" style="display: none;">
+            <label class="form-control-label" for="phone_number">Phone Number:</label>
+            <input type="text" name="phone_number" class="form-control" id="phone_number" />
+          </div>
+          <div class="col-lg-12 registerbttm">
+            <div class="col-lg-6 register-btm register-text">
+              <!-- You can place any error messages here -->
             </div>
-
-            <!-- Last Name -->
-            <div class="form-group">
-              <label for="last_name" class="form-control-label"
-                >Last Name:</label
-              >
-              <input
-                type="text"
-                name="last_name"
-                class="form-control"
-                id="last_name"
-                required
-              />
+            <div class="col-lg-6 register-btm register-button">
+              <button type="submit" class="btn btn-outline-primary">Register</button>
+              <a href="{% url 'login' %}" class="btn btn-outline-secondary">Login</a>
             </div>
-
-            <!-- Username -->
-            <div class="form-group">
-              <label for="username" class="form-control-label">Username:</label>
-              <input
-                type="text"
-                name="username"
-                class="form-control"
-                id="username"
-                required
-              />
-            </div>
-
-            <!-- Password -->
-            <div class="form-group">
-              <label for="password1" class="form-control-label"
-                >Password:</label
-              >
-              <input
-                type="password"
-                name="password1"
-                class="form-control"
-                id="password1"
-                required
-              />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="form-group">
-              <label for="password2" class="form-control-label"
-                >Confirm Password:</label
-              >
-              <input
-                type="password"
-                name="password2"
-                class="form-control"
-                id="password2"
-                required
-              />
-            </div>
-
-            <!-- Notifications Checkbox -->
-            <div class="form-check">
-              <input
-                type="checkbox"
-                name="notifications"
-                class="form-check-input"
-                id="notifications"
-                onchange="togglePhoneNumberInput()"
-              />
-              <label class="form-check-label" for="notifications"
-                >Receive notifications</label
-              >
-            </div>
-
-            <!-- Phone Number (initially hidden) -->
-            <div class="form-group" id="phone_number_div" style="display: none">
-              <label for="phone_number" class="form-control-label"
-                >Phone Number:</label
-              >
-              <input
-                type="text"
-                name="phone_number"
-                class="form-control"
-                id="phone_number"
-              />
-            </div>
-
-            <!-- Submit Button -->
-            <div class="col-lg-12 registerbttm">
-              <div class="col-lg-6 register-btm register-text">
-                <!-- You can place any error messages here -->
-              </div>
-              <div class="col-lg-6 register-btm register-button">
-                <button type="submit" class="btn btn-outline-primary">
-                  Register
-                </button>
-                <a href="{% url 'login' %}" class="btn btn-outline-secondary"
-                  >Login</a
-                >
-              </div>
-            </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="col-lg-3 col-md-2"></div>
   </div>
 </div>
 

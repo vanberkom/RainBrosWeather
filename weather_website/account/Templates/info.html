@@ -1,10 +1,51 @@
-{% extends 'base.html' %} {% block content %}
-<div class="container accountBody">
-  <p>Username: {{ username }}</p>
-  <p>First Name: {{ first_name }}</p>
-  <p>Last Name: {{ last_name }}</p>
-  <p>Phone Number: {{ phone_number }}</p>
-  <p>Notifications: {{ choice }}</p>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/info.css' %}" />
+
+<div class="container account-info">
+    <div class="row">
+        <div class="col-lg-3 col-md-2"></div>
+        <div class="col-lg-6 col-md-8 info-box">
+            <div class="col-lg-12 info-title">Account Information</div>
+            <div class="col-lg-12 info-details">
+                <p><strong>Username:</strong> {{ username }}</p>
+                <p><strong>First Name:</strong> {{ first_name }}</p>
+                <p><strong>Last Name:</strong> {{ last_name }}</p>
+                {% if phone_number %}
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input">
+                    
+                </div>
+                    <p><strong>Phone Number:</strong> {{ phone_number }}</p>
+                {% endif %}
+                <div class="form-check">
+                    <input type="checkbox"
+                           class="form-check-input"
+                           id="notifications"
+                           name="notifications"
+                           {% if phone_number %}
+                               checked
+                           {% endif %}
+                           onchange="togglePhoneNumberInput()"/>
+                    <label class="form-check-label" for="notifications">
+                        Receive notifications
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-2"></div>
+    </div>
 </div>
 
 {% endblock %}
+
+<script>
+function togglePhoneNumberInput() {
+    // Function to toggle the phone number input based on checkbox state
+    const checkbox = document.getElementById('notifications');
+    const phoneNumberDiv = document.getElementById('phone_number_div');
+    phoneNumberDiv.style.display = checkbox.checked ? 'block' : 'none';
+}
+</script>
+
